@@ -1,0 +1,185 @@
+{
+    "balance": {
+        "current": 3150.20,
+        "income": 4500.00,
+        "expenses": 2100.80
+    },
+    "transactions": [
+        {
+            "avatar": "./assets/images/avatars/tech-solutions-inc.jpg",
+            "name": "Tech Solutions Inc",
+            "category": "General",
+            "date": "2026-09-21T09:00:00Z",
+            "amount": 4500.00,
+            "recurring": true
+        },
+        {
+            "avatar": "./assets/images/avatars/fresh-market.jpg",
+            "name": "Fresh Market",
+            "category": "Groceries",
+            "date": "2026-09-19T14:30:22Z",
+            "amount": -145.80,
+            "recurring": false
+        },
+        {
+            "avatar": "./assets/images/avatars/city-power-light.jpg",
+            "name": "City Power & Light",
+            "category": "Bills",
+            "date": "2026-09-18T10:15:00Z",
+            "amount": -112.50,
+            "recurring": true
+        },
+        {
+            "avatar": "./assets/images/avatars/burger-joint.jpg",
+            "name": "Burger Joint",
+            "category": "Dining Out",
+            "date": "2026-09-17T20:45:11Z",
+            "amount": -35.20,
+            "recurring": false
+        },
+        {
+            "avatar": "./assets/images/avatars/cinema-city.jpg",
+            "name": "Cinema City",
+            "category": "Entertainment",
+            "date": "2026-09-15T19:00:00Z",
+            "amount": -48.00,
+            "recurring": false
+        },
+        {
+            "avatar": "./assets/images/avatars/metro-pass.jpg",
+            "name": "Metro Pass",
+            "category": "Transportation",
+            "date": "2026-09-12T08:30:15Z",
+            "amount": -60.00,
+            "recurring": true
+        },
+        {
+            "avatar": "./assets/images/avatars/tech-gadgets.jpg",
+            "name": "Tech Gadgets",
+            "category": "Shopping",
+            "date": "2026-09-10T16:20:45Z",
+            "amount": -299.99,
+            "recurring": false
+        },
+        {
+            "avatar": "./assets/images/avatars/hair-salon.jpg",
+            "name": "Style Hair Salon",
+            "category": "Personal Care",
+            "date": "2026-09-08T11:00:00Z",
+            "amount": -55.00,
+            "recurring": false
+        },
+        {
+            "avatar": "./assets/images/avatars/gym-membership.jpg",
+            "name": "Iron Fitness Gym",
+            "category": "Lifestyle",
+            "date": "2026-09-05T07:15:00Z",
+            "amount": -89.90,
+            "recurring": true
+        },
+        {
+            "avatar": "./assets/images/avatars/online-course.jpg",
+            "name": "Code Academy",
+            "category": "Education",
+            "date": "2026-09-03T14:40:20Z",
+            "amount": -120.00,
+            "recurring": false
+        },
+        {
+            "avatar": "./assets/images/avatars/lucas-silva.jpg",
+            "name": "Lucas Silva",
+            "category": "General",
+            "date": "2026-09-02T18:25:30Z",
+            "amount": 50.00,
+            "recurring": false
+        },
+        {
+            "avatar": "./assets/images/avatars/coffee-shop.jpg",
+            "name": "Morning Brew",
+            "category": "Dining Out",
+            "date": "2026-09-01T08:15:00Z",
+            "amount": -12.50,
+            "recurring": false
+        },
+        {
+            "avatar": "./assets/images/avatars/water-utility.jpg",
+            "name": "Aqua Utilities",
+            "category": "Bills",
+            "date": "2026-08-28T09:10:00Z",
+            "amount": -45.60,
+            "recurring": true
+        },
+        {
+            "avatar": "./assets/images/avatars/bookstore.jpg",
+            "name": "City Bookstore",
+            "category": "Shopping",
+            "date": "2026-08-25T15:30:00Z",
+            "amount": -34.50,
+            "recurring": false
+        },
+        {
+            "avatar": "./assets/images/avatars/pharmacy.jpg",
+            "name": "Health Plus Pharmacy",
+            "category": "Personal Care",
+            "date": "2026-08-22T10:45:00Z",
+            "amount": -85.25,
+            "recurring": false
+        },
+        {
+            "avatar": "./assets/images/avatars/streaming-service.jpg",
+            "name": "StreamFlix",
+            "category": "Entertainment",
+            "date": "2026-08-20T12:00:00Z",
+            "amount": -15.99,
+            "recurring": true
+        }
+    ],
+    "budgets": [
+        {
+            "category": "Groceries",
+            "maximum": 500.00,
+            "theme": "#1F7A8C"
+        },
+        {
+            "category": "Transportation",
+            "maximum": 150.00,
+            "theme": "#BFDBF7"
+        },
+        {
+            "category": "Lifestyle",
+            "maximum": 200.00,
+            "theme": "#9A031E"
+        },
+        {
+            "category": "Shopping",
+            "maximum": 400.00,
+            "theme": "#E36414"
+        }
+    ],
+    "pots": [
+        {
+            "name": "Emergency Fund",
+            "target": 5000.00,
+            "total": 1250.00,
+            "theme": "#0F4C5C"
+        },
+        {
+            "name": "Trip to Japan",
+            "target": 8000.00,
+            "total": 1800.00,
+            "theme": "#E36414"
+        },
+        {
+            "name": "Car Maintenance",
+            "target": 600.00,
+            "total": 240.00,
+            "theme": "#5F0F40"
+        },
+        {
+            "name": "New Smartphone",
+            "target": 1200.00,
+            "total": 850.00,
+            "theme": "#9A031E"
+        }
+    ]
+}

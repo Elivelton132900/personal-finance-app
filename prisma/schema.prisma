@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Users {
+  iduser            String   @id @default(cuid()) @db.VarChar(32)
+  name              String   @unique @db.VarChar(255)
+  email             String   @unique @db.VarChar(100)
+  password_hash     String   @db.VarChar(255)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+  current_balance   Decimal  @default(0) @db.Decimal(10, 2)
+  income            Decimal  @default(0) @db.Decimal(10, 2)
+  expenses          Decimal  @default(0) @db.Decimal(10, 2)
+
+  transactions      Transactions[]
+  pots              Pots[]
+  budgets           Budgets[]
+
+}
+
+model Transactions {
+  idtransaction String   @id @default(cuid()) @db.VarChar(32)
+  created_at    DateTime @default(now())
+  avatar        String?  @db.Text
+  category      String   @db.VarChar(40)
+  amount        Decimal  @db.Decimal(10, 2)
+  name          String   @db.VarChar(100)
+  recurring     Boolean  @default(false)
+  fk_iduser     String   @db.VarChar(32)
+
+  user Users @relation(fields: [fk_iduser], references: [iduser])
+
+
+  @@index([fk_iduser], map: "fk_iduser_transactions_idx")
+  
+}
+
+
+model Pots {
+  idpot     String   @id @default(cuid()) @db.VarChar(32)
+  total     Decimal  @default(0) @db.Decimal(10, 2)
+  target    Decimal  @default(0) @db.Decimal(10, 2)
+  theme     String   @db.VarChar(20)
+  name      String   @db.VarChar(30)
+  fk_iduser String   @db.VarChar(32)
+
+  user Users @relation(fields: [fk_iduser], references: [iduser])
+
+  @@index([fk_iduser], map: "fk_iduser_pots_idx")
+}
+
+model Budgets {
+  idbudget   String   @id @default(cuid()) @db.VarChar(32)
+  category   String   @db.VarChar(40)
+  theme      String   @db.VarChar(20)
+  maximum    Decimal  @default(0) @db.Decimal(10, 2)
+  fk_iduser  String   @db.VarChar(32)
+
+  user Users @relation(fields: [fk_iduser], references: [iduser])
+
+  @@index([fk_iduser], map: "fk_iduser_budgets_idx")
+
+}

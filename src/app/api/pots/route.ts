@@ -7,10 +7,9 @@ export async function GET() {
 
   const user = await auth()
 
-  requireAuth()
+  await requireAuth()
 
   const iduser = user?.user?.id as string
-  console.log(iduser)
   const result = await prisma.$queryRaw`
     SELECT
 	    p."name",

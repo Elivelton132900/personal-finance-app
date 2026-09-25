@@ -7,7 +7,7 @@ export async function GET() {
 
   const user = await auth()
 
-  requireAuth()
+  await requireAuth()
 
   const iduser = user?.user?.id as string
   const currentBalance = await getUserCurrentBalance(iduser)

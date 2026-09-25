@@ -28,7 +28,6 @@ export async function getUserDashboardData() {
     }
   })
 
-  console.log(userData)
 
   return userData
 }

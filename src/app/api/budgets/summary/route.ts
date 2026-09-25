@@ -1,17 +1,15 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 import prisma from "@/lib/prisma";
+import { requireAuth } from "@/lib/utils";
 
 export async function GET() {
 
   const user = await auth()
 
-  if (!user?.user?.id) {
-    redirect('/login')
-  }
+  requireAuth()
 
-  const iduser = user.user.id
+  const iduser = user?.user?.id
 
   const result = await prisma.$queryRaw`
     WITH budgets AS (

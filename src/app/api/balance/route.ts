@@ -1,17 +1,15 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 import { getUserCurrentBalance } from "@/lib/getUserCurrentBalance";
+import { requireAuth } from "@/lib/utils";
 
 export async function GET() {
 
   const user = await auth()
 
-  if (!user?.user?.id) {
-    redirect('/login')
-  }
+  requireAuth()
 
-  const iduser = user.user.id
+  const iduser = user?.user?.id as string
   const currentBalance = await getUserCurrentBalance(iduser)
 
   console.log("current balance: ", currentBalance)

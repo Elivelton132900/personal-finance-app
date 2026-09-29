@@ -27,7 +27,6 @@ export async function GET(request: Request) {
 
   await requireAuth()
 
-
   const session = await auth()
   const iduser = session?.user?.id as string
 

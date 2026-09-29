@@ -5,9 +5,9 @@ import { requireAuth } from "@/lib/utils";
 
 export async function GET() {
 
-  const user = await auth()
-
   await requireAuth()
+
+  const user = await auth()
 
   const iduser = user?.user?.id
 
@@ -41,6 +41,6 @@ export async function GET() {
     GROUP BY budget_category, maximum;
   `
 
-    return NextResponse.json({budget: result}, {status: 200})
+  return NextResponse.json({ data: result }, { status: 200 })
 
 }

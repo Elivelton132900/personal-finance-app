@@ -5,9 +5,9 @@ import prisma from "@/lib/prisma";
 
 export async function GET() {
 
-  const user = await auth()
-
   await requireAuth()
+
+  const user = await auth()
 
   const iduser = user?.user?.id as string
   const result = await prisma.$queryRaw`
@@ -23,10 +23,10 @@ export async function GET() {
   `
 
   const totalValueBills = await prisma.transactions.aggregate({
-    where: {fk_iduser: iduser},
-    _sum: {amount: true}
+    where: { fk_iduser: iduser },
+    _sum: { amount: true }
   })
 
-  return NextResponse.json({recurrentBills: result, total: totalValueBills._sum}, {status: 200})
+  return NextResponse.json({ data: result, total: totalValueBills._sum }, { status: 200 })
 
 }

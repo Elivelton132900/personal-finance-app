@@ -5,15 +5,14 @@ import { requireAuth } from "@/lib/utils";
 
 export async function GET() {
 
-  const user = await auth()
-
   await requireAuth()
+  const user = await auth()
 
   const iduser = user?.user?.id as string
   const currentBalance = await getUserCurrentBalance(iduser)
 
   console.log("current balance: ", currentBalance)
 
-  return NextResponse.json({current_balance: currentBalance}, {status: 200})
+  return NextResponse.json({data: currentBalance}, {status: 200})
 
 }

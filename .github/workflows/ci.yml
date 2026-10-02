@@ -59,6 +59,11 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
+      - name: Run Automated Tests
+        run: npx vitest run
+        env:
+          DATABASE_URL: "postgresql://admin:adminpassword@localhost:5432/financetestdb?schema=public"
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
       - name: Build Next.js
         run: npm run build
         env:

@@ -37,7 +37,7 @@ model Transactions {
 
 
   @@index([fk_iduser], map: "fk_iduser_transactions_idx")
-  
+
 }
 
 

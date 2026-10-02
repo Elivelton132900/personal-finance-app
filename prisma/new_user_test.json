@@ -6,6 +6,30 @@
     },
     "transactions": [
         {
+            "avatar": "./assets/images/avatars/internet-provider.jpg",
+            "name": "Global Net",
+            "category": "Bills",
+            "date": "2026-09-30T10:00:00Z",
+            "amount": -80.00,
+            "recurring": true
+        },
+        {
+            "avatar": "./assets/images/avatars/water-utility.jpg",
+            "name": "Aqua Utilities",
+            "category": "Bills",
+            "date": "2026-09-25T14:00:00Z",
+            "amount": -45.00,
+            "recurring": true
+        },
+        {
+            "avatar": "./assets/images/avatars/streaming-service.jpg",
+            "name": "StreamFlix",
+            "category": "Entertainment",
+            "date": "2026-09-23T10:00:00Z",
+            "amount": -15.99,
+            "recurring": true
+        },
+        {
             "avatar": "./assets/images/avatars/tech-solutions-inc.jpg",
             "name": "Tech Solutions Inc",
             "category": "General",

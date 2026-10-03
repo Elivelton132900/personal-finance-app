@@ -25,6 +25,9 @@ import { PUT as updatePot } from "@/app/api/pots/[id]/route"
 
 import { DELETE as deleteBudget } from "@/app/api/budgets/[id]/route"
 import { DELETE as deletePot } from "@/app/api/pots/[id]/route"
+import prisma from "@/lib/prisma"
+import { Decimal } from "@prisma/client/runtime/client"
+
 
 
 describe('1. Unauthenticated Access Protection (Route Guard)', () => {
@@ -85,4 +88,85 @@ describe('1. Unauthenticated Access Protection (Route Guard)', () => {
     await expect(handler).rejects.toThrow(NEXT_REDIRECT_OR_401)
   })
 
+})
+
+describe('2. Cross-User Data Isolation and IDOR Protection', () => {
+  const dummyRequest = new NextRequest("http://localhost:3000/api/falso-endpoint")
+  const dummyContext = { params: Promise.resolve({ id: "recurso-do-usuario-b-999" }) }
+
+  const isolatedEndpoints = [
+    // --- POTS ---
+    {
+      name: "GET /api/pots/[id]",
+      expectedStatus: 404,
+      handler: () => getPotById(dummyRequest, dummyContext),
+    },
+    {
+      name: "PUT /api/pots/[id]",
+      expectedStatus: 404,
+      handler: () => updatePot(new NextRequest("http://localhost:3000/api/falso-endpoint", {
+        method: "PUT",
+        body: JSON.stringify({ name: "Nome", theme: "green", target: 500 })
+      }), dummyContext),
+    },
+    {
+      name: "DELETE /api/pots/[id]",
+      expectedStatus: 404,
+      handler: () => deletePot(dummyRequest, dummyContext),
+    },
+    {
+      name: "POST /api/pots/[id]/transfer/deposit",
+      expectedStatus: 404,
+      handler: () => depositToPot(new NextRequest("http://localhost:3000/api/falso-endpoint", {
+        method: "POST",
+        body: JSON.stringify({ amount: 100 })
+      }), dummyContext),
+    },
+    {
+      name: "POST /api/pots/[id]/transfer/withdraw",
+      expectedStatus: 404,
+      handler: () => withdrawFromPot(new NextRequest("http://localhost:3000/api/falso-endpoint", {
+        method: "POST",
+        body: JSON.stringify({ amount: 50 })
+      }), dummyContext),
+    },
+
+    // --- BUDGETS ---
+    {
+      name: "PUT /api/budgets/[id]",
+      expectedStatus: 404,
+      handler: () => updateBudget(new NextRequest("http://localhost:3000/api/falso-endpoint", {
+        method: "PUT",
+        body: JSON.stringify({ category: "Lazer", maximum: 500, theme: "blue" })
+      }), dummyContext),
+    },
+    {
+      name: "DELETE /api/budgets/[id]",
+      expectedStatus: 404,
+      handler: () => deleteBudget(dummyRequest, dummyContext),
+    },
+  ]
+
+  it.each(isolatedEndpoints)('should block User A from accessing $name belonging to User B', async ({ handler }) => {
+
+    const mockRecordNotFound = () => {
+      vi.mocked(prisma.budgets.findFirst).mockResolvedValueOnce(null)
+      vi.mocked(prisma.budgets.create).mockResolvedValueOnce({
+        "fk_iduser": "dd",
+        "theme": "aa",
+        "category": "bb",
+        "idbudget": "cc",
+        "maximum": new Decimal(500)
+      })
+      vi.mocked(prisma.$queryRaw).mockResolvedValueOnce([{ name: "Reserva", total: 100 }])
+      vi.mocked(prisma.pots.aggregate).mockResolvedValueOnce({ _sum: { total: new Decimal(100) }, } as unknown as Awaited<ReturnType<typeof prisma.pots.aggregate>>)
+    }
+
+    mockRecordNotFound()
+
+    const response = await handler()
+
+    expect(response.status).toBe(404)
+
+  })
 })

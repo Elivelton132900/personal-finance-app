@@ -9,10 +9,9 @@ vi.mock('next/server', async (importOriginal) => {
     ...actual,
     NextResponse: {
       json: vi.fn((body, options) => ({
-        data: body.data,
-        error: body.error,
-        status: options?.status || 200,
-      })),
+        json: async () => body,
+        status: options?.status || 200
+      }))
     },
   }
 })

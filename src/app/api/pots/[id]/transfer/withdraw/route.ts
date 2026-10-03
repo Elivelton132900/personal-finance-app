@@ -69,7 +69,7 @@ export async function POST(request: Request, context: { params: Promise<{ id: st
       return NextResponse.json({ error: e.message }, { status: 400 })
     }
 
-    return NextResponse.json({ error: "Interrnal server error" }, { status: 500 })
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
 
   }
 }

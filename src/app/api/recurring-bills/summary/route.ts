@@ -21,8 +21,6 @@ export async function GET() {
     WHERE t.recurring = true AND t.fk_iduser = ${idUser}
     ORDER BY t.name, t.created_at DESC;
   `
-
-    console.log("vendors e id ", vendors, idUser)
     return NextResponse.json({ data: vendors }, { status: 200 })
 
   } catch {

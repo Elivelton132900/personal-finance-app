@@ -10,9 +10,6 @@ export async function GET() {
 
   const iduser = user?.user?.id as string
   const currentBalance = await getUserCurrentBalance(iduser)
-
-  console.log("current balance: ", currentBalance)
-
   return NextResponse.json({data: currentBalance}, {status: 200})
 
 }

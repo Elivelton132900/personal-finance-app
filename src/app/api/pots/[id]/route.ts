@@ -59,7 +59,7 @@ export async function DELETE(request: Request, context: { params: Promise<{ id: 
     })
 
     if (!existentPot) {
-      return NextResponse.json({ error: "Pots não encontrado" }, { status: 404 })
+      return NextResponse.json({ error: "Pot não encontrado" }, { status: 404 })
     }
 
     await prisma.$transaction(async (tx) => {

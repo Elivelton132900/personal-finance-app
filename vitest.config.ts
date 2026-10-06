@@ -1,11 +1,19 @@
 import { defineConfig } from 'vitest/config'
-import tsconfigPaths from 'vite-tsconfig-paths'
+import path from 'path'
 
 export default defineConfig({
-  plugins: [tsconfigPaths()],
   test: {
-    environment: 'node',
+    environment: 'happy-dom', // ou 'jsdom'
     globals: true,
-    setupFiles: ['./__tests__/setup.ts']
+    server: {
+      deps: {
+        inline: ['next-auth'], // Força o Vitest a compilar o next-auth corretamente
+      },
+    },
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
   },
 })
